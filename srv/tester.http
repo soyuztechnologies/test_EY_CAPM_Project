@@ -1,0 +1,135 @@
+
+GET http://localhost:4004/CatalogService
+
+###Read the metadata
+GET http://localhost:4004/CatalogService/$metadata
+
+###Getting the Purchase order - pagination
+GET http://localhost:4004/CatalogService/POs
+
+###Filtering data using odata
+GET http://localhost:4004/CatalogService/BusinessPartnerSet?$filter=contains(COMPANY_NAME,'Industries')
+
+###Read Single record by key
+GET http://localhost:4004/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+###Read Depenent data of Items and PO together
+GET http://localhost:4004/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+
+###Get sample new employee
+GET http://localhost:4004/CatalogService/EmployeeSet
+Authorization: Basic anubhav:
+
+###Create new employee
+POST http://localhost:4004/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+    "ID": "02BD2137-0890-1EEA-A6C2-BB55C1977999",
+    "nameFirst": "Ronadlo",
+    "nameMiddle": null,
+    "nameLast": "Chistriano",
+    "nameInitials": null,
+    "sex": "F",
+    "language": "E",
+    "email": "chistriano.ronaldo@manchester.com",
+    "loginName": "RONALD",
+    "Currency_code": "USD",
+    "salaryAmount": 99850,
+    "accountNumber": "12165489",
+    "bankId": "510000655",
+    "bankName": "My Bank of Antioch"
+}
+
+###Get the created employee data
+GET http://localhost:4004/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C1979999
+
+
+###Update salary of the employee
+PATCH http://localhost:4004/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C1979999
+Content-Type: application/json
+
+{
+    "Currency_code": "EUR",
+    "salaryAmount": 1000000
+}
+
+
+###Get V2 Service
+GET http://localhost:4004/v2/CatalogService
+
+###Read the metadata
+GET http://localhost:4004/v2/CatalogService/$metadata
+
+###Getting the Purchase order - pagination
+GET http://localhost:4004/v2/CatalogService/POs?$top=2
+
+###Filtering data using odata
+GET http://localhost:4004/v2/CatalogService/BusinessPartnerSet?$filter=contains(COMPANY_NAME,'Industries')
+
+###Read Single record by key
+GET http://localhost:4004/v2/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+###Read Depenent data of Items and PO together
+GET http://localhost:4004/v2/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+
+###Get sample new employee
+GET http://localhost:4004/v2/CatalogService/EmployeeSet
+
+
+###Read my generic handler entity
+GET http://localhost:4004/mysrvdemo/ReadEmployeeSrv
+
+###Read my generic handler entity
+GET http://localhost:4004/mysrvdemo/ReadEmployeeSrv/02BD2134-0890-1EEA-A6C2-BB55C1978970
+
+###Read my generic handler entity
+POST http://localhost:4004/mysrvdemo/InsertEmployeeSrv
+Content-Type: application/json
+
+{
+    "ID": "02BD2134-0890-1EEA-A6C2-BB55C1978970",
+    "nameFirst": "Leonardo",
+    "nameMiddle": null,
+    "nameLast": "Da Vincci",
+    "nameInitials": null,
+    "sex": "F",
+    "language": "E",
+    "email": "leonardo@manchester.com",
+    "loginName": "RONALD",
+    "Currency_code": "USD",
+    "salaryAmount": 91000,
+    "accountNumber": "12165489",
+    "bankId": "510000655",
+    "bankName": "My Bank of Antioch"
+}
+
+###Read my generic handler entity
+PUT http://localhost:4004/mysrvdemo/UpdateEmployeeSrv/02BD2134-0890-1EEA-A6C2-BB55C1978970
+Content-Type: application/json
+
+{
+    "ID": "02BD2134-0890-1EEA-A6C2-BB55C1978970",
+    "nameFirst": "Chistopher",
+    "nameLast": "Columbus"
+}
+
+###Delete using custom handler
+DELETE http://localhost:4004/mysrvdemo/UpdateEmployeeSrv/02BD2134-0890-1EEA-A6C2-BB55C1978970
+
+###Call our function
+GET http://localhost:4004/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/CatalogService.largestOrder()
+
+###Boost our data
+POST http://localhost:4004/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/CatalogService.boost
+Content-Type: application/json
+
+{}
+
+###Read
+GET http://localhost:4004/CatalogService/POs?$filter=contains(PO_ID,'5000001')&$expand=Items
+
+###
+GET http://localhost:4004/CatalogService/PurchaseOrderItems?$skiptoken=1000
